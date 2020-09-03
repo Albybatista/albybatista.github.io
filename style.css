@@ -1,6 +1,53 @@
 body {
     font-family: 'Alata', sans-serif;
-    /* background: url("https://image.freepik.com/free-vector/stock-market-forex-trading-graph-graphic-concept_73426-20.jpg") */
-    /* background: url("https://img.freepik.com/free-vector/business-candle-stick-graph-chart-stock-market_41981-1435.jpg?size=626&ext=jpg") */
-    background: url("")
+}
+
+.header {
+    text-align: center;
+    padding: 2em;
+}
+
+.header > h1 {
+    text-decoration: underline;
+}
+
+#submit {
+    border-radius: 10%;
+}
+
+video {
+    object-fit: cover;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -999;
+}
+
+#mInfo {
+    text-align: right;
+    border-radius: 10%;
+}
+
+#modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    overflow: auto;
+    display: none;
+}
+
+#boxText {
+    background-color: white;
+    height: 350px;
+    width: 550px;
+    border-radius: 3px;
+    margin: 150px auto;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    line-height: 120%;
+    overflow: auto;
 }

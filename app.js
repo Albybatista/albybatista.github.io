@@ -1,111 +1,63 @@
 $(() => {
     $('form').on('submit', (event) => {
-        event.preventDefault()
-    const userTick = $('#input-box');
-    userTick.val()
-    console.log(userTick);
+    event.preventDefault()
+    const userTick = $('input[type="text"]').val();
+    //^^ will get values from inputbox
+//Comp. Overview ------------->
+    var compV = {
+        "url": "https://cors-anywhere.herokuapp.com/https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + userTick + "&apikey=5AQX9VMHC3NNBFPR",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+        "x-api-key": "5AQX9VMHC3NNBFPR"
+    },
+};
 
-
-
-//global
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://alpha-vantage.p.rapidapi.com/query?datatype=json&function=GLOBAL_QUOTE&symbol=" + userTick,
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-        "x-rapidapi-key": "b65776fb85msh55bdd52e2d985fdp18d51fjsn8b3af1d26786"
-    }
-}
-
-$.ajax(settings).done(function (response) {
+$.ajax(compV).done(function (response) {
     console.log(response);
-});
+    let oView = response.Description; 
+    //^^gets info from api
+    $('#overview').append(oView);
+    });
 
+//Global Quote ------------->
+    var ePoint = {
+        "url": "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + userTick + "&apikey=5AQX9VMHC3NNBFPR",
+        "method": "GET",
+        "timeout": 0,
+        };
 
-//Intraday 5 min
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://alpha-vantage.p.rapidapi.com/query?datatype=json&output_size=compact&interval=5min&function=TIME_SERIES_INTRADAY&symbol=" + userTick,
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-        "x-rapidapi-key": "b65776fb85msh55bdd52e2d985fdp18d51fjsn8b3af1d26786"
-    }
-}
-
-$.ajax(settings).done(function (response) {
+    $.ajax(ePoint).done(function (response) {
     console.log(response);
-});
+        let globalQuote = response["Global Quote"];
+        for(let key in globalQuote){
+                $('#quote').append(`<ul>${key} ${globalQuote[key]}</ul>`)
+            }
+        })
+        console.log(globalQuote);
+        });
+    });
 
+// More Details Modal ------------>
+    const popBox = $('#mInfo');
+    const modal = $('#modal');
+    const closeBox = $('#close');
 
-// Company Overview
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https: //www.alphavantage.co/query?function=OVERVIEW&symbol=" + userTick + "&apikey=5AQX9VMHC3NNBFPR",
-    "method": "GET"
-    // ,"headers": {
-    //     "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-    //     "x-rapidapi-key": "b65776fb85msh55bdd52e2d985fdp18d51fjsn8b3af1d26786"
+    const mDetails = () => {
+    const userTick = $('input[type="text"]').val();
+        $.get("https://cors-anywhere.herokuapp.com/https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + userTick + "&apikey=5AQX9VMHC3NNBFPR", (data) => {
+    let oview2 = mDetails
+        for (let key in data) {
+            if (key !== 'Description') {
+            $('#boxText').append(`<ul>${key} ${data[key]}</ul>`)
+                }
+            }
+        })
+        modal.css('display', 'block');
     }
-})
+    const closeModal = () => {
+        modal.css('display', 'none');
+    }
 
-$.ajax(settings).done(function (response) {
-    console.log(response);
-    })
-});
-
-
-
-
-// $('button').on('click', (event) => {
-//     event.preventDefault();
-//     const userTick = ($(event.currentTarget).attr('id')) 
-// })
-// $('#input-box').val();
-
-// $.ajax(
-//     {
-//         url: "https://alpha-vantage.p.rapidapi.com/query?function=GLOBAL_QUOTE&symbol=" + userTick,
-//         type:"GET",
-//         data: { 
-//             "$limit": 500;
-//             "$$app_token": "5AQX9VMHC3NNBFPR"
-
-//         }
-//     }
-// }).then(
-//     (data) => {
-
-//     }
-// )
-// )
-
-
-
-//Pseudocode
-// Pull info -- .val
-// Save info -- 
-// Show info 
-// display info on page 
-
-// Global quote (also quote endpoint) will give me following data -----
-// "Global Quote": {
-//     "01. symbol": "TSLA",
-//     "02. open": "2295.1200",
-//     "03. high": "2318.4900",
-//     "04. low": "2186.5200",
-//     "05. price": "2213.4000",
-//     "06. volume": "20081176",
-//     "07. latest trading day": "2020-08-28",
-//     "08. previous close": "2238.7500",
-//     "09. change": "-25.3500",
-//     "10. change percent": "-1.1323%"
-// }
-// }
-
-// Company Overview will give me this, but only need 
-// Name, description, exchange, sector, industry
+    popBox.on('click', mDetails);
+    closeBox.on('click', closeModal);

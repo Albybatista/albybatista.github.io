@@ -12,25 +12,41 @@
 </head>
 
 <body>
-    <h1>Stock Away</h1>
-
-    <h2>Pick Your Stocks Your Way</h2>
+<div class="col-auto">
+                            <!-- Video -->
+    <div class="video">
+        <video playsinline autoplay muted loop>
+            <source src="StocksAPI-Video2.mp4" type="video/mp4">
+                <!-- Video Credit: “Stock footage provided by Videvo, downloaded from www.videvo.net” -->
+        </video>
+    </div>
+                            <!-- Heading -->
+    <div class="header">
+        <h1>Stock Away</h1>
+        <h2>Pick Your Stocks Your Way</h2>
+                            <!-- On submit -->
     <form>
-    <input type="text" id="input-box" placeholder="Ticker">
-
-    <input type="button" id="submit" value="Search">
-
-    <div class="Ticker" id="globalOutlook">
-    </div>
-
-    <div class="Intraday" id="intraday">
-    </div>
-
-    <div class="Company Overview" id="companyOverview">
-    </div>
+        <input type="text" id="input-box" placeholder="Ticker">
+        <button type="submit" name="button" id="submit">Search</button> 
     </form>
+    </div>
+                            <!-- Info Section -->
+    <div class="container">
+        <h3 id="quote">Quote: </h3>
+        <h3 id="overview">Company Overview: </h3>
 
+                            <!-- Modal Button  -->
+        <button type="text" id="mInfo">More Details</button>
 
+                                <!-- Modal -->
+        <div id="modal">
+            <div id="boxText">
+                <a id="close" href="#">Close</a>
+                <div id="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js">
     </script>
     <script src="app.js"></script>
