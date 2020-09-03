@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Stock Away App ----
 - https://albybatista.github.io/
 
@@ -26,3 +27,7 @@ Future Features ---
 - Education section with references to strategies, books, and additional resources
 - Job board
 
+=======
+# albybatista.github.io
+AlphaVantage Stocks API
+>>>>>>> 7ebd836d6d3d1b28578635a77a0e16cf0696f179
